@@ -1,8 +1,0 @@
-.confirmed{
-    font-size: larger;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    border: 5px solid blue;
-    justify-content: space-between;
-}

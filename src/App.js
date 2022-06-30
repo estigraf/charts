@@ -1,27 +1,4 @@
-// import './App.css';
-// import {BrowserRouter, Route, Routes} from 'react-router-dom'
-// import Navbar from './components/Navbar/Navbar';
-// import Home from './pages/Home/Home';
-// import About from './pages/About/About';
-// import Country from './pages/Country/Country';
 
-// function App() {
-//   return (
-//     <div>
-//       <BrowserRouter>
-//       <Navbar/>
-//       <Routes>
-//         <Route path='/home' element={<Home/>} />
-//         <Route path='/about' element={<About/>} />
-//         <Route path='/country' element={<Country/>} />
-//         <Route path='/country/:url' element={<Country/>} />
-//       </Routes>
-//       </BrowserRouter>
-//     </div>
-//   );
-// }
-
-// export default App;
 import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
 import "./App.css";
@@ -47,24 +24,8 @@ const COLORS = {
   usa: "#2563EB",
   holand: "#D97706",
 };
+
 const contrys = [
-  {
-    name: "holand",
-    data: [19, 9, 20],
-    color: COLORS.holand,
-  },
-  {
-    name: "france",
-    data: [12, 6, 15],
-    color: COLORS.france,
-  },
-  {
-    name: "isral",
-    data: [7, 3, 5],
-    color: COLORS.israel,
-  },
-];
-const series = [
   {
     status: "holand",
     data: [43, 30, 59],
@@ -76,7 +37,7 @@ const series = [
     color: COLORS.france,
   },
   {
-    status: "u-s-a",
+    status: "usa",
     data: [3, 5, 1],
     color: COLORS.usa,
   },
@@ -93,7 +54,7 @@ const series = [
 ];
 const categories = ["activ", "kill", "ceriality"];
 const seriesLabels = {
-  visible: true,
+  visible: false,
   padding: 3,
   font: "normal 16px Arial, sans-serif",
   position: "right",
@@ -120,6 +81,11 @@ const applicationsStatus = [
     value: 32,
     color: COLORS.france,
   },
+  {
+    status: "holand",
+    value: 32,
+    color: COLORS.holand,
+  },
 ];
 const labelContent = (e) => e.category;
 
@@ -128,13 +94,15 @@ function App() {
     <div className="App">
       <div className="container">
         <h1>covid 19</h1>
+        
         <div className="section">
           <Chart zoomable pannable>
             {/* must be */}
-            <ChartTitle text="covid status " />
-            {/* tytle of the chart */}
             <ChartLegend visible={true} />
             {/* /טמחזיר רשימה בצד=תפרי*/}
+            <ChartTitle text="covid status " />
+            {/* tytle of the chart */}
+            
             <ChartTooltip render={renderTooltip} />
             {/* מחזיר את המספר באחוזים */}
             <ChartSeries>
@@ -167,14 +135,14 @@ function App() {
         <div className="section">
           <Chart zoomable pannable>
             <ChartTitle text="covid status " />
-            <ChartLegend visible={true} />
+            <ChartLegend visible={false} />
             <ChartCategoryAxis>
               <ChartCategoryAxisItem categories={categories}>
                 <ChartCategoryAxisTitle text="covid 19" />
               </ChartCategoryAxisItem>
             </ChartCategoryAxis>
             <ChartSeries>
-              {series.map((item, idx) => (
+              {contrys.map((item, idx) => (
                 <ChartSeriesItem
                   key={idx}
                   type="bar"
