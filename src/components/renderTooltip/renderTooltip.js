@@ -5,7 +5,7 @@ const renderTooltip = context => {
     console.log(context);
     return (
       <div>
-        {category}: {value}%
+        {category}: {value}
       </div>
     );
   };
