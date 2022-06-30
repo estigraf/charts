@@ -5,7 +5,6 @@
 // import About from './pages/About/About';
 // import Country from './pages/Country/Country';
 
-
 // function App() {
 //   return (
 //     <div>
@@ -26,7 +25,7 @@
 import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
 import "./App.css";
-import renderTooltip from "./components/renderTooltip/renderTooltip"
+import renderTooltip from "./components/renderTooltip/renderTooltip";
 import {
   ChartValueAxis,
   ChartValueAxisItem,
@@ -48,7 +47,7 @@ const COLORS = {
   usa: "#2563EB",
   holand: "#D97706",
 };
- const contrys = [
+const contrys = [
   {
     name: "holand",
     data: [19, 9, 20],
@@ -100,9 +99,7 @@ const seriesLabels = {
   position: "right",
 };
 
-
-
-const applicationsStatusThisMonth = [
+const applicationsStatus = [
   {
     status: "yaerden",
     value: 15,
@@ -124,7 +121,7 @@ const applicationsStatusThisMonth = [
     color: COLORS.france,
   },
 ];
-const labelContent = e => e.category;
+const labelContent = (e) => e.category;
 
 function App() {
   return (
@@ -132,79 +129,96 @@ function App() {
       <div className="container">
         <h1>covid 19</h1>
         <div className="section">
+          <Chart zoomable pannable>
+            {/* must be */}
+            <ChartTitle text="covid status " />
+            {/* tytle of the chart */}
+            <ChartLegend visible={true} />
+            {/* /טמחזיר רשימה בצד=תפרי*/}
+            <ChartTooltip render={renderTooltip} />
+            {/* מחזיר את המספר באחוזים */}
+            <ChartSeries>
+              {/* must be */}
+              <ChartSeriesItem
+              // doing charts
+                type="donut"
+                data={applicationsStatus}
+                categoryField="status"
+                field="value"
+              >
+                <ChartSeriesLabels
+                  // Design letters
 
-        <Chart zoomable pannable>
-        <ChartTitle text="covid status " />
-      <ChartLegend visible={false} />
-      <ChartTooltip render={renderTooltip} />
-      <ChartSeries>
-        <ChartSeriesItem
-          type="donut"
-          data={applicationsStatusThisMonth}
-          categoryField="status"
-          field="value"
-        >
-                  <ChartSeriesLabels
-            color="#fff"
-            background="none"
-            content={labelContent}
-          />
-        </ChartSeriesItem>
-      </ChartSeries>
-    </Chart>
-      </div>
-      <div className="section">
-      <Chart zoomable pannable>
-      <ChartTitle text="covid status " />
-      <ChartLegend visible={true} />
-      <ChartCategoryAxis>
-        <ChartCategoryAxisItem categories={categories}>
-          <ChartCategoryAxisTitle text="covid 19" />
-        </ChartCategoryAxisItem>
-      </ChartCategoryAxis>
-      <ChartSeries>
-        {series.map((item, idx) => (
-          <ChartSeriesItem
-            key={idx}
-            type="bar"
-            gap={2}
-            spacing={0.25}
-            labels={seriesLabels}
-            data={item.data}
-            name={item.status}
-            color={item.color}
-          />
-        ))}
-      </ChartSeries>
-    </Chart>
-      </div>
-      <div className="section">
-      <Chart pannable zoomable style={{ height: 350 }}>
-      <ChartTitle text="covid status" />
-      <ChartLegend position="top" orientation="horizontal" />
-      <ChartValueAxis>
-        <ChartValueAxisItem title={{ text: "numbers" }} min={0} max={30} />
-      </ChartValueAxis>
-      <ChartCategoryAxis>
-        <ChartCategoryAxisItem categories={categories} />
-      </ChartCategoryAxis>
-      <ChartSeries>
-      {contrys.map((item, idx) => (
-          <ChartSeriesItem
-            key={idx}
-            type="line"
-            tooltip={{ visible: true }}
-            data={item.data}
-            name={item.name}
-          />
-        ))}
-      </ChartSeries>
-    </Chart>
-      </div>
+                  color="#fff"
+                  // colors of letters
+                  background="#000"
+                  // background of letters
+
+                  content={labelContent}
+                  // return names instead of numbers
+                />
+              </ChartSeriesItem>
+              {/* must be */}
+            </ChartSeries>
+            {/* must be */}
+          </Chart>
+          {/* must be */}
+        </div>
+        <div className="section">
+          <Chart zoomable pannable>
+            <ChartTitle text="covid status " />
+            <ChartLegend visible={true} />
+            <ChartCategoryAxis>
+              <ChartCategoryAxisItem categories={categories}>
+                <ChartCategoryAxisTitle text="covid 19" />
+              </ChartCategoryAxisItem>
+            </ChartCategoryAxis>
+            <ChartSeries>
+              {series.map((item, idx) => (
+                <ChartSeriesItem
+                  key={idx}
+                  type="bar"
+                  gap={2}
+                  spacing={0.25}
+                  labels={seriesLabels}
+                  data={item.data}
+                  name={item.status}
+                  color={item.color}
+                />
+              ))}
+            </ChartSeries>
+          </Chart>
+        </div>
+        <div className="section">
+          <Chart pannable zoomable style={{ height: 350 }}>
+            <ChartTitle text="covid status" />
+            <ChartLegend position="top" orientation="horizontal" />
+            <ChartValueAxis>
+              <ChartValueAxisItem
+                title={{ text: "numbers" }}
+                min={0}
+                max={30}
+              />
+            </ChartValueAxis>
+            <ChartCategoryAxis>
+              <ChartCategoryAxisItem categories={categories} />
+            </ChartCategoryAxis>
+            <ChartSeries>
+              {contrys.map((item, idx) => (
+                <ChartSeriesItem
+                  key={idx}
+                  type="line"
+                  tooltip={{ visible: true }}
+                  data={item.data}
+                  name={item.name}
+                />
+              ))}
+            </ChartSeries>
+          </Chart>
+        </div>
       </div>
     </div>
   );
 }
 
 export default App;
-
