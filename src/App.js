@@ -135,7 +135,8 @@ function App() {
         <div className="section">
           <Chart zoomable pannable>
             <ChartTitle text="covid status " />
-            <ChartLegend visible={false} />
+            <ChartTooltip render={renderTooltip }  />
+            <ChartLegend visible={true} />
             <ChartCategoryAxis>
               <ChartCategoryAxisItem categories={categories}>
                 <ChartCategoryAxisTitle text="covid 19" />

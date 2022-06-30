@@ -1,7 +1,7 @@
 import React from 'react'
 
 const renderTooltip = context => {
-    const { category, value } = context.point || context;
+    const { category, value,} = context.point || context;
     console.log(context);
     return (
       <div>
