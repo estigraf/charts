@@ -1,14 +1,8 @@
-
 import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
 import "./App.css";
 import renderTooltip from "./components/renderTooltip/renderTooltip";
 import {
-  ChartValueAxis,
-  ChartValueAxisItem,
-  ChartCategoryAxis,
-  ChartCategoryAxisTitle,
-  ChartCategoryAxisItem,
   ChartTooltip,
   Chart,
   ChartTitle,
@@ -17,6 +11,7 @@ import {
   ChartSeriesItem,
   ChartSeriesLabels,
 } from "@progress/kendo-react-charts";
+import { Chart1 } from "./components/Chart/Chart1";
 const COLORS = {
   yaerden: "#059669",
   israel: "#B91C1C",
@@ -28,7 +23,7 @@ const COLORS = {
 const contrys = [
   {
     status: "holand",
-    data: [43, 30, 59],
+    data: [43, 30, 110],
     color: COLORS.holand,
   },
   {
@@ -94,7 +89,7 @@ function App() {
     <div className="App">
       <div className="container">
         <h1>covid 19</h1>
-        
+
         <div className="section">
           <Chart zoomable pannable>
             {/* must be */}
@@ -102,13 +97,13 @@ function App() {
             {/* /טמחזיר רשימה בצד=תפרי*/}
             <ChartTitle text="covid status " />
             {/* tytle of the chart */}
-            
+
             <ChartTooltip render={renderTooltip} />
             {/* מחזיר את המספר באחוזים */}
             <ChartSeries>
               {/* must be */}
               <ChartSeriesItem
-              // doing charts
+                // doing charts
                 type="donut"
                 data={applicationsStatus}
                 categoryField="status"
@@ -132,59 +127,32 @@ function App() {
           </Chart>
           {/* must be */}
         </div>
-        <div className="section">
-          <Chart zoomable pannable>
-            <ChartTitle text="covid status " />
-            <ChartTooltip render={renderTooltip }  />
-            <ChartLegend visible={true} />
-            <ChartCategoryAxis>
-              <ChartCategoryAxisItem categories={categories}>
-                <ChartCategoryAxisTitle text="covid 19" />
-              </ChartCategoryAxisItem>
-            </ChartCategoryAxis>
-            <ChartSeries>
-              {contrys.map((item, idx) => (
-                <ChartSeriesItem
-                  key={idx}
-                  type="bar"
-                  gap={2}
-                  spacing={0.25}
-                  labels={seriesLabels}
-                  data={item.data}
-                  name={item.status}
-                  color={item.color}
-                />
-              ))}
-            </ChartSeries>
-          </Chart>
-        </div>
-        <div className="section">
-          <Chart pannable zoomable style={{ height: 350 }}>
-            <ChartTitle text="covid status" />
-            <ChartLegend position="top" orientation="horizontal" />
-            <ChartValueAxis>
-              <ChartValueAxisItem
-                title={{ text: "numbers" }}
-                min={0}
-                max={30}
-              />
-            </ChartValueAxis>
-            <ChartCategoryAxis>
-              <ChartCategoryAxisItem categories={categories} />
-            </ChartCategoryAxis>
-            <ChartSeries>
-              {contrys.map((item, idx) => (
-                <ChartSeriesItem
-                  key={idx}
-                  type="line"
-                  tooltip={{ visible: true }}
-                  data={item.data}
-                  name={item.name}
-                />
-              ))}
-            </ChartSeries>
-          </Chart>
-        </div>
+        <Chart1
+          typeOfChart={contrys.map((item, idx) => (
+            <ChartSeriesItem
+              key={idx}
+              type="bar"
+              tooltip={{ visible: true }}
+              data={item.data}
+              name={item.name}
+            />
+          ))}
+          contrys={contrys}
+          categories={categories}
+        />
+        <Chart1
+          typeOfChart={contrys.map((item, idx) => (
+            <ChartSeriesItem
+              key={idx}
+              type="line"
+              tooltip={{ visible: true }}
+              data={item.data}
+              name={item.name}
+            />
+          ))}
+          contrys={contrys}
+          categories={categories}
+        />
       </div>
     </div>
   );
